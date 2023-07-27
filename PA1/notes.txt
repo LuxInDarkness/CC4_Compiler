@@ -1,0 +1,7 @@
+%state STRING MULTILINE
+
+<YYINITIAL>['"']              { yybegin(STRING); }
+
+<STRING>['"']                 { yybegin(YYINITIAL); }
+
+<STRING>[.]*              { return new Symbol(TokenConstants.STR_CONST, AbstractTable.stringtable.addString(yytext())); }
